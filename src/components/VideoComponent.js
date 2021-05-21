@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-const WorkTiles = props => {
+const VideoComponent = props => {
   /*Breaks*/
 
   const videoQuery = useStaticQuery(
@@ -10,7 +10,7 @@ const WorkTiles = props => {
         allFile(filter: { relativePath: { eq: "bg.mp4" } }) {
           nodes {
             name
-            childVideoFfmpeg {
+            video: childVideoFfmpeg {
               transcode(
                 maxWidth: 900
                 maxHeight: 480
@@ -29,9 +29,9 @@ const WorkTiles = props => {
   )
   return (
     <video id="videoBg" autoPlay muted loop>
-      <source src={""} type="video/mp4" />
+      <source src={videoQuery.nodes[0].video.src} type="video/mp4" />
     </video>
   )
 }
 
-export default WorkTiles
+export default VideoComponent
